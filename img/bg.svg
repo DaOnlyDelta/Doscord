@@ -1,0 +1,131 @@
+<!-- bg-discordstyle.svg - editable SVG background -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- gradients -->
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0" stop-color="#0b1226"/>
+      <stop offset="1" stop-color="#0b1733"/>
+    </linearGradient>
+    <radialGradient id="neb1" cx="20%" cy="30%" r="60%">
+      <stop offset="0" stop-color="#6b7cff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#6b7cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="neb2" cx="85%" cy="20%" r="50%">
+      <stop offset="0" stop-color="#ff7ab6" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ff7ab6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="neb3" cx="60%" cy="80%" r="70%">
+      <stop offset="0" stop-color="#28c3ff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#28c3ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- blurred group filter for soft nebula -->
+    <filter id="big-blur" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="180" result="b"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.95"/>
+      </feComponentTransfer>
+    </filter>
+
+    <!-- soft smaller blur -->
+    <filter id="soft-blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+
+    <!-- glow/drop shadow -->
+    <filter id="drop" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="s"/>
+      <feOffset dx="0" dy="6" result="o"/>
+      <feMerge>
+        <feMergeNode in="o"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- tiny stars pattern (repeatable) -->
+    <pattern id="stars" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="8" r="1.0" fill="white" opacity="0.85"/>
+      <circle cx="40" cy="10" r="0.7" fill="white" opacity="0.6"/>
+      <circle cx="20" cy="50" r="0.5" fill="white" opacity="0.45"/>
+    </pattern>
+
+    <!-- subtle grain (very low opacity) -->
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.06"/>
+      </feComponentTransfer>
+    </filter>
+
+    <!-- floating block gradient -->
+    <linearGradient id="blockGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8aa4ff"/>
+      <stop offset="1" stop-color="#5b76f8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- base -->
+  <rect width="100%" height="100%" fill="url(#g1)"/>
+
+  <!-- large soft nebula blobs (use big blur) -->
+  <g filter="url(#big-blur)" opacity="0.9">
+    <ellipse cx="340" cy="260" rx="520" ry="320" fill="url(#neb1)" opacity="0.9"/>
+    <ellipse cx="1600" cy="220" rx="420" ry="260" fill="url(#neb2)" opacity="0.86"/>
+    <ellipse cx="1100" cy="760" rx="700" ry="380" fill="url(#neb3)" opacity="0.78"/>
+  </g>
+
+  <!-- medium soft shapes with smaller blur to simulate layered fog -->
+  <g filter="url(#soft-blur)" opacity="0.8">
+    <path d="M200 750 C 420 680, 380 540, 640 520 C 900 500, 780 760, 540 820 Z" fill="#2b3b7a" opacity="0.12"/>
+    <path d="M1300 600 C 1460 520, 1600 540, 1680 640 C 1760 740, 1500 820, 1360 760 Z" fill="#ff6ea6" opacity="0.09"/>
+  </g>
+
+  <!-- floating "blocks" (rounded rectangles) with inner highlights -->
+  <g filter="url(#drop)" opacity="0.97">
+    <g transform="translate(430,160) rotate(-12)">
+      <rect rx="28" ry="28" width="260" height="160" fill="url(#blockGrad)" opacity="0.95"/>
+      <rect rx="28" ry="28" x="12" y="12" width="236" height="120" fill="white" opacity="0.03"/>
+    </g>
+
+    <g transform="translate(1240,120) rotate(6)">
+      <rect rx="22" ry="22" width="210" height="140" fill="#ff8fb3" opacity="0.9"/>
+      <rect rx="22" ry="22" x="12" y="12" width="186" height="100" fill="white" opacity="0.02"/>
+    </g>
+
+    <g transform="translate(980,420) rotate(-18)">
+      <rect rx="32" ry="32" width="340" height="210" fill="#40d1ff" opacity="0.88"/>
+      <rect rx="32" ry="32" x="16" y="18" width="308" height="150" fill="white" opacity="0.02"/>
+    </g>
+  </g>
+
+  <!-- diagonal light streaks for subtle motion -->
+  <g opacity="0.06" filter="url(#soft-blur)">
+    <rect x="-300" y="100" width="2200" height="120" transform="rotate(-12 700 60)" fill="#8be3ff"/>
+    <rect x="200" y="380" width="1400" height="80" transform="rotate(-6 900 420)" fill="#ff8fc4"/>
+  </g>
+
+  <!-- starfield: mix of pattern + some larger stars -->
+  <rect width="100%" height="100%" fill="url(#stars)" opacity="0.28"/>
+  <g fill="white" opacity="0.95">
+    <circle cx="120" cy="60" r="1.6" opacity="0.95"/>
+    <circle cx="510" cy="220" r="1.1" opacity="0.9"/>
+    <circle cx="860" cy="40" r="1.8" opacity="0.9"/>
+    <circle cx="1530" cy="90" r="1.2" opacity="0.85"/>
+    <circle cx="1720" cy="440" r="1.7" opacity="0.9"/>
+    <circle cx="400" cy="860" r="1.1" opacity="0.85"/>
+  </g>
+
+  <!-- low-opacity grain overlay -->
+  <rect width="100%" height="100%" filter="url(#grain)"/>
+
+  <!-- vignette (darken edges) -->
+  <radialGradient id="vign" cx="50%" cy="40%">
+    <stop offset="0" stop-color="rgba(0,0,0,0)"/>
+    <stop offset="1" stop-color="rgba(0,0,0,0.45)"/>
+  </radialGradient>
+  <rect width="100%" height="100%" fill="url(#vign)"/>
+
+  <!-- subtle UI-friendly overlay for contrast behind panels -->
+  <rect x="0" y="0" width="100%" height="100%" fill="black" opacity="0.04"/>
+</svg>
