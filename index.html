@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Doscord</title>
 </head>
 <body>
@@ -30,11 +31,11 @@
             </div>
             <div>
                 <label for="mailOrPhone">Email or Phone Number</label>
-                <input type="text" id="mailOrPhone" name="mailOrPhone">
+                <input type="text" id="mailOrPhone" name="mailOrPhone" required>
             </div>
             <div>
                 <label for="pass">Password</label>
-                <input type="password" id="pass" name="pass">
+                <input type="password" id="pass" name="pass" required>
                 <h4>Forgot your password?</h4>
             </div>
             <div>
@@ -88,40 +89,42 @@
             </div>
             <div>
                 <label for="regMail">Email</label>
-                <input type="email" id="regMail" name="regMail">
+                <input type="email" id="regMail" name="regMail" required>
             </div>
             <div>
                 <label for="regDisplay" class="noAsterix">Display Name</label>
-                <input type="text" id="regDisplay" name="regDisplay">
+                <input type="text" id="regDisplay" name="regDisplay" required>
             </div>
             <div>
                 <label for="regUsername">Username</label>
-                <input type="text" id="regUsername" name="regUsername">
+                <input type="text" id="regUsername" name="regUsername" required>
             </div>
             <div>
                 <label for="regPass">Password</label>
-                <input type="password" id="regPass" name="regPass">
+                <input type="password" id="regPass" name="regPass" required>
             </div>
             <label>Date of Birth</label>
             <div id="dateOfBirth">
                 <div id="month-select">
                     <select name="month" id="month">
-                        <option value="jan">January</option>
-                        <option value="feb">February</option>
-                        <option value="mar">March</option>
-                        <option value="apr">April</option>
-                        <option value="may">May</option>
-                        <option value="jun">June</option>
-                        <option value="jul">July</option>
-                        <option value="aug">August</option>
-                        <option value="sep">September</option>
-                        <option value="oct">October</option>
-                        <option value="nov">November</option>
-                        <option value="dec">December</option>
+                        <option value="" disabled selected hidden>Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
                     </select>
                 </div>
                 <div id="day-select">
                     <select name="day" id="day">
+                        <option value="" disabled selected hidden>Day</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -157,6 +160,7 @@
                 </div>
                 <div id="year-select">
                     <select name="year" id="year">
+                        <option value="" disabled selected hidden>Year</option>
                         <option value="2020">2020</option>
                         <option value="2019">2019</option>
                         <option value="2018">2018</option>
@@ -290,8 +294,9 @@
                 <input type="checkbox" name="termsCheck" id="termsCheck">
                 <label for="termsCheck" id="larger" class="noAsterix">I have read and agree to Doscord's <span class="blue">Terms of Service</span> and <span class="blue">Privacy Policy.</span></label>
             </div>
-            <div>
-                <input type="submit" value="Create Account">
+            <div id="button-container">
+                <input type="submit" value="Create Account" id="regSubmit">
+                <span id="tooltip">You need to agree to our<br>Terms of Service to continue</span>
             </div>
             <div id="bottom">
                 <h4>Already have an account? Log in</h4>
@@ -325,5 +330,120 @@
             loginForm.classList.add('active');
         });
     </script>
+    <script lang="js">
+        document.getElementById("mid").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const emailField = document.getElementById("mailOrPhone");
+            const passwordField = document.getElementById("pass");
+
+            if (emailField.value.trim() === "") {
+                emailField.focus();
+                return;
+            }
+
+            if (passwordField.value.trim() === "") {
+                passwordField.focus();
+                return;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Login successful!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+    </script>
+    <script lang="js">
+        document.getElementById("reg").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const emailField = document.getElementById("regMail");
+            const displayField = document.getElementById("regDisplay");
+            const UsernameField = document.getElementById("regUsername");
+            const passwordField = document.getElementById("regPass");
+            const monthField = document.getElementById("month-select");
+            const dayField = document.getElementById("day-select");
+            const yearField = document.getElementById("year-select");
+            const month = parseInt(document.getElementById("month").value);
+            const day = parseInt(document.getElementById("day").value);
+            const year = parseInt(document.getElementById("year").value);
+            const submit = document.getElementById("regSubmit");
+
+            if (emailField.value.trim() === "") {
+                emailField.focus();
+                return;
+            }
+
+            if (displayField.value.trim() === "") {
+                displayField.focus();
+                return;
+            }
+
+            if (UsernameField.value.trim() === "") {
+                UsernameField.focus();
+                return;
+            }
+
+            if (passwordField.value.trim() === "") {
+                passwordField.focus();
+                return;
+            }
+
+            // Check if any field is empty
+            if (!month || !day || !year) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Please select month, day, and year!",
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+                return;
+            }
+
+            // Create a date object
+            const date = new Date(year, month - 1, day);
+
+            // Validate the date
+            const isValid =
+                date.getFullYear() === year &&
+                date.getMonth() === month - 1 &&
+                date.getDate() === day;
+
+            if (!isValid) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Please select a valid date!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return;
+            }
+
+            Swal.fire({
+                icon: "success",
+                title: "Register successful!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+    </script>
+    <script>
+        const checkbox = document.getElementById('termsCheck');
+        const submitBtn = document.getElementById('regSubmit');
+
+        // Initially disable the button
+        submitBtn.classList.remove('enabled');
+        submitBtn.disabled = true;
+
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+            submitBtn.disabled = false;
+            submitBtn.classList.add('enabled');
+            } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.remove('enabled');
+            }
+        });
+        </script>
 </body>
 </html>
