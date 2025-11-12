@@ -30,11 +30,11 @@
             </div>
             <div>
                 <label for="mailOrPhone">Email or Phone Number</label>
-                <input type="text" id="mailOrPhone" name="mailOrPhone" required>
+                <input type="text" id="mailOrPhone" name="mailOrPhone" maxlength="16" required>
             </div>
             <div>
                 <label for="pass">Password</label>
-                <input type="password" id="pass" name="pass" required>
+                <input type="password" id="pass" name="pass" minlength="6" maxlength="16" required>
                 <h4>Forgot your password?</h4>
             </div>
             <div>
@@ -71,15 +71,15 @@
             </div>
             <div>
                 <label for="regDisplay" class="noAsterix">Display Name</label>
-                <input type="text" id="regDisplay" name="regDisplay" required>
+                <input type="text" id="regDisplay" name="regDisplay" maxlength="16" required>
             </div>
             <div>
                 <label for="regUsername">Username</label>
-                <input type="text" id="regUsername" name="regUsername" required>
+                <input type="text" id="regUsername" name="regUsername" pattern="[A-Za-z0-9]+" title="Only letters and numbers allowed" maxlength="16" required>
             </div>
             <div>
                 <label for="regPass">Password</label>
-                <input type="password" id="regPass" name="regPass" required>
+                <input type="password" id="regPass" name="regPass" minlength="6" maxlength="16" required>
             </div>
             <label>Date of Birth</label>
             <div id="dateOfBirth">

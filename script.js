@@ -62,8 +62,12 @@ document.getElementById("mid").addEventListener("submit", function (event) {
         icon: "success",
         title: "Login successful!",
         showConfirmButton: false,
+        background: 'rgb(57, 58, 65)',
+        color: '#fff',
         timer: 1500
     });
+
+    clearFormInputs();
 });
 
 // Check reg form values
@@ -73,9 +77,6 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     const displayField = document.getElementById("regDisplay");
     const UsernameField = document.getElementById("regUsername");
     const passwordField = document.getElementById("regPass");
-    const monthField = document.getElementById("month-select");
-    const dayField = document.getElementById("day-select");
-    const yearField = document.getElementById("year-select");
     const month = parseInt(document.getElementById("month").value);
     const day = parseInt(document.getElementById("day").value);
     const year = parseInt(document.getElementById("year").value);
@@ -106,6 +107,8 @@ document.getElementById("reg").addEventListener("submit", function (event) {
             icon: "error",
             title: "Please select month, day, and year!",
             showConfirmButton: false,
+            background: 'rgb(57, 58, 65)',
+            color: '#fff',
             timer: 2500
         });
         return;
@@ -123,6 +126,8 @@ document.getElementById("reg").addEventListener("submit", function (event) {
             icon: "error",
             title: "Please select a valid date!",
             showConfirmButton: false,
+            background: 'rgb(57, 58, 65)',
+            color: '#fff',
             timer: 1500
         });
         return;
@@ -132,8 +137,12 @@ document.getElementById("reg").addEventListener("submit", function (event) {
         icon: "success",
         title: "Register successful!",
         showConfirmButton: false,
+        background: 'rgb(57, 58, 65)',
+        color: '#fff',
         timer: 1500
     });
+
+    clearFormInputs();
 });
 
 // ToS checkbox trigger
@@ -153,3 +162,39 @@ checkbox.addEventListener('change', () => {
         submitBtn.classList.remove('enabled');
     }
 });
+
+// Function to validate input for only a-z, A-Z, 0-9
+function restrictToAlphanumeric(field) {
+  field.addEventListener('input', () => {
+    const value = field.value;
+    if (/[^a-zA-Z0-9]/.test(value)) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid character',
+        text: 'You can only use letters (A–Z) and numbers (0–9).',
+        confirmButtonText: 'Got it',
+        background: 'rgb(57, 58, 65)',
+        color: '#fff',
+      });
+      field.value = value.replace(/[^a-zA-Z0-9]/g, '');
+    }
+  });
+}
+
+// Apply the restriction to multiple fields
+const usernameField = document.getElementById("regUsername");
+const passwordField = document.getElementById("regPass");
+
+restrictToAlphanumeric(usernameField);
+restrictToAlphanumeric(passwordField);
+
+// Reset all inputs
+function clearFormInputs() {
+  // Clear text, password, and email inputs
+  const inputs = document.querySelectorAll('input[type="text"], input[type="password"], input[type="email"]');
+  inputs.forEach(input => input.value = '');
+
+  // Reset all selects to their first option (hidden default)
+  const selects = document.querySelectorAll('select');
+  selects.forEach(select => select.selectedIndex = 0);
+}
