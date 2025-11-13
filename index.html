@@ -28,13 +28,16 @@
                 <h1>Welcome back!</h1>
                 <h2>We're so excited to see you again!</h2>
             </div>
-            <div>
+            <div id="contactWrapper">
                 <label for="mailOrPhone">Email or Phone Number</label>
-                <input type="text" id="mailOrPhone" name="mailOrPhone" maxlength="16" required>
+                <div class="inputWrapper">
+                    <input type="text" id="mailOrPhone" name="mailOrPhone" maxlength="32" required>
+                    <select id="countrySelect" hidden></select>
+                </div>
             </div>
             <div>
                 <label for="pass">Password</label>
-                <input type="password" id="pass" name="pass" minlength="6" maxlength="16" required>
+                <input type="password" id="pass" name="pass" minlength="6" maxlength="32" required>
                 <h4>Forgot your password?</h4>
             </div>
             <div>
@@ -71,7 +74,7 @@
             </div>
             <div>
                 <label for="regDisplay" class="noAsterix">Display Name</label>
-                <input type="text" id="regDisplay" name="regDisplay" maxlength="16" required>
+                <input type="text" id="regDisplay" name="regDisplay" maxlength="16">
             </div>
             <div>
                 <label for="regUsername">Username</label>
@@ -79,7 +82,7 @@
             </div>
             <div>
                 <label for="regPass">Password</label>
-                <input type="password" id="regPass" name="regPass" minlength="6" maxlength="16" required>
+                <input type="password" id="regPass" name="regPass" minlength="6" maxlength="32" required>
             </div>
             <label>Date of Birth</label>
             <div id="dateOfBirth">
