@@ -1,3 +1,6 @@
+const mid = document.getElementById('mid');
+const reg = document.getElementById('reg');
+
 // QR code generator
 function generateRandomId(len = 20) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -21,26 +24,24 @@ const qr = new QRCode(document.getElementById("qrBox"), {
 
 
 // Transition between forms
-const loginForm = document.getElementById('mid');
-const registerForm = document.getElementById('reg');
 const trigger = document.querySelector('#bottom h4');
 
 trigger.addEventListener('click', () => {
-    loginForm.classList.remove('active');
-    loginForm.classList.add('out');
+    mid.classList.remove('active');
+    mid.classList.add('out');
 
-    registerForm.classList.remove('out');
-    registerForm.classList.add('active');
+    reg.classList.remove('out');
+    reg.classList.add('active');
 });
 
 const backBtn = document.querySelector('#reg #bottom h4');
 
 backBtn.addEventListener('click', () => {
-    registerForm.classList.remove('active');
-    registerForm.classList.add('out');
+    reg.classList.remove('active');
+    reg.classList.add('out');
 
-    loginForm.classList.remove('out');
-    loginForm.classList.add('active');
+    mid.classList.remove('out');
+    mid.classList.add('active');
 });
 
 
@@ -51,7 +52,7 @@ function checkEmail(email) {
 }
 
 // Check mid form values
-document.getElementById("mid").addEventListener("submit", function (event) {
+mid.addEventListener("submit", function (event) {
     event.preventDefault();
     const emailField = document.getElementById("mailOrPhone");
     const passwordField = document.getElementById("pass");
@@ -77,12 +78,6 @@ document.getElementById("mid").addEventListener("submit", function (event) {
     if ((!isEmail && !isPhone) || hasPlus) {
         hideForms(1500);
         Swal.fire({
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-
             icon: 'warning',
             title: 'Invalid input',
             text: isPhone && hasPlus ? "Please remove the prefix from the input field and select it on the right." : "Please enter a valid email address or phone number!",
@@ -90,6 +85,11 @@ document.getElementById("mid").addEventListener("submit", function (event) {
             background: 'rgb(57, 58, 65)',
             color: '#fff',
             timer: 1500,
+        }).then(() => {
+            setTimeout(() => {
+                if (mid) mid.style.display = '';
+                if (reg) reg.style.display = '';
+            }, 150);
         });
         emailField.focus();
         return;
@@ -97,15 +97,17 @@ document.getElementById("mid").addEventListener("submit", function (event) {
 
     hideForms(1500);
     Swal.fire({
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-
         icon: "success",
         title: "Login successful!",
         showConfirmButton: false,
         background: 'rgb(57, 58, 65)',
         color: '#fff',
         timer: 1500
+    }).then(() => {
+        setTimeout(() => {
+            if (mid) mid.style.display = '';
+            if (reg) reg.style.display = '';
+        }, 150);
     });
 
     clearFormInputs();
@@ -113,7 +115,7 @@ document.getElementById("mid").addEventListener("submit", function (event) {
 
 
 // Check reg form values
-document.getElementById("reg").addEventListener("submit", function (event) {
+reg.addEventListener("submit", function (event) {
     event.preventDefault();
     const emailField = document.getElementById("regMail");
     const UsernameField = document.getElementById("regUsername");
@@ -140,15 +142,17 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!month || !day || !year) {
         hideForms(2500);
         Swal.fire({
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-
             icon: "error",
             title: "Please select month, day, and year!",
             showConfirmButton: false,
             background: 'rgb(57, 58, 65)',
             color: '#fff',
             timer: 2500
+        }).then(() => {
+            setTimeout(() => {
+                if (mid) mid.style.display = '';
+                if (reg) reg.style.display = '';
+            }, 150);
         });
         return;
     }
@@ -157,9 +161,6 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!checkEmail(emailField.value.trim())) {
         hideForms(1500);
         Swal.fire({
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-
             icon: 'warning',
             title: 'Invalid email',
             text: "Please enter a valid email address!",
@@ -167,6 +168,11 @@ document.getElementById("reg").addEventListener("submit", function (event) {
             background: 'rgb(57, 58, 65)',
             color: '#fff',
             timer: 1500,
+        }).then(() => {
+            setTimeout(() => {
+                if (mid) mid.style.display = '';
+                if (reg) reg.style.display = '';
+            }, 150);
         });
         emailField.focus();
         return;
@@ -178,9 +184,6 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!(/[A-Z]/.test(password) && /[0-9]/.test(password) && /[^a-zA-Z0-9]/.test(password))) {
         hideForms(2500);
         Swal.fire({
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-
             icon: 'warning',
             title: 'Weak password',
             text: 'Password must contain at least 1 uppercase letter, 1 number, and 1 symbol.',
@@ -188,6 +191,11 @@ document.getElementById("reg").addEventListener("submit", function (event) {
             background: 'rgb(57, 58, 65)',
             color: '#fff',
             timer: 2500
+        }).then(() => {
+            setTimeout(() => {
+                if (mid) mid.style.display = '';
+                if (reg) reg.style.display = '';
+            }, 150);
         });
         passwordField.focus();
         return;
@@ -203,30 +211,34 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!isValid) {
         hideForms(1500);
         Swal.fire({
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-
             icon: "error",
             title: "Please select a valid date!",
             showConfirmButton: false,
             background: 'rgb(57, 58, 65)',
             color: '#fff',
             timer: 1500
+        }).then(() => {
+            setTimeout(() => {
+                if (mid) mid.style.display = '';
+                if (reg) reg.style.display = '';
+            }, 150);
         });
         return;
     }
 
     hideForms(1500);
     Swal.fire({
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-
         icon: "success",
         title: "Register successful!",
         showConfirmButton: false,
         background: 'rgb(57, 58, 65)',
         color: '#fff',
         timer: 1500
+    }).then(() => {
+        setTimeout(() => {
+            if (mid) mid.style.display = '';
+            if (reg) reg.style.display = '';
+        }, 150);
     });
 
     clearFormInputs();
@@ -265,9 +277,6 @@ function restrictCharacters(field) {
         if (/[^a-zA-Z0-9.,_/\\@$!#%&?+-]/.test(value)) {
             hideForms(2500);
             Swal.fire({
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-
                 icon: 'warning',
                 title: 'Invalid character',
                 text: 'You can only use letters, numbers and (.,_/\\@$!#%&?+-).',
@@ -275,6 +284,11 @@ function restrictCharacters(field) {
                 background: 'rgb(57, 58, 65)',
                 color: '#fff',
                 timer: 2500,
+            }).then(() => {
+                setTimeout(() => {
+                    if (mid) mid.style.display = '';
+                    if (reg) reg.style.display = '';
+                }, 150);
             });
             field.value = value.replace(/[^a-zA-Z0-9]/g, '');
         }
@@ -312,8 +326,7 @@ function clearFormInputs() {
 
 // Hide the forms on SweetAlert trigger
 function hideForms(duration) {
-    const mid = document.getElementById('mid');
-    const reg = document.getElementById('reg');
+
 
     if (mid) mid.style.display = 'none';
     if (reg) reg.style.display = 'none';
