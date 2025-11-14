@@ -77,6 +77,12 @@ document.getElementById("mid").addEventListener("submit", function (event) {
     if ((!isEmail && !isPhone) || hasPlus) {
         hideForms(1500);
         Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+
             icon: 'warning',
             title: 'Invalid input',
             text: isPhone && hasPlus ? "Please remove the prefix from the input field and select it on the right." : "Please enter a valid email address or phone number!",
@@ -91,6 +97,9 @@ document.getElementById("mid").addEventListener("submit", function (event) {
 
     hideForms(1500);
     Swal.fire({
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+
         icon: "success",
         title: "Login successful!",
         showConfirmButton: false,
@@ -131,6 +140,9 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!month || !day || !year) {
         hideForms(2500);
         Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+
             icon: "error",
             title: "Please select month, day, and year!",
             showConfirmButton: false,
@@ -145,6 +157,9 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!checkEmail(emailField.value.trim())) {
         hideForms(1500);
         Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+
             icon: 'warning',
             title: 'Invalid email',
             text: "Please enter a valid email address!",
@@ -163,6 +178,9 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!(/[A-Z]/.test(password) && /[0-9]/.test(password) && /[^a-zA-Z0-9]/.test(password))) {
         hideForms(2500);
         Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+
             icon: 'warning',
             title: 'Weak password',
             text: 'Password must contain at least 1 uppercase letter, 1 number, and 1 symbol.',
@@ -185,6 +203,9 @@ document.getElementById("reg").addEventListener("submit", function (event) {
     if (!isValid) {
         hideForms(1500);
         Swal.fire({
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+
             icon: "error",
             title: "Please select a valid date!",
             showConfirmButton: false,
@@ -197,6 +218,9 @@ document.getElementById("reg").addEventListener("submit", function (event) {
 
     hideForms(1500);
     Swal.fire({
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+
         icon: "success",
         title: "Register successful!",
         showConfirmButton: false,
@@ -241,6 +265,9 @@ function restrictCharacters(field) {
         if (/[^a-zA-Z0-9.,_/\\@$!#%&?+-]/.test(value)) {
             hideForms(2500);
             Swal.fire({
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+
                 icon: 'warning',
                 title: 'Invalid character',
                 text: 'You can only use letters, numbers and (.,_/\\@$!#%&?+-).',
