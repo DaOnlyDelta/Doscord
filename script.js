@@ -70,8 +70,11 @@ mid.addEventListener("submit", function (event) {
     }
 
     const isEmail = checkEmail(value);
-
     const isPhone = phoneDetected;
+    if (isPhone && value.trim().length() < 6) {
+        setTimeout(() => emailField.focus(), 0); // pushes focus to the end of the event loop
+        return;
+    }
     const hasPlus = isPhone && value.includes("+");
 
     // Trigger SweetAlert for invalid input
@@ -242,6 +245,11 @@ reg.addEventListener("submit", function (event) {
     });
 
     clearFormInputs();
+    reg.classList.remove('active');
+    reg.classList.add('out');
+
+    mid.classList.remove('out');
+    mid.classList.add('active');
 });
 
 
@@ -428,3 +436,38 @@ countries.forEach(country => {
     option.textContent = `${country.flag} ${country.code}`;
     countrySelect.appendChild(option);
 });
+
+
+// Fill the selects in js
+const yearSelect = document.getElementById("year");
+const monthSelect = document.getElementById("month");
+const daySelect = document.getElementById("day");
+
+// Populate years (e.g., 2000 to 2025)
+for (let y = 2000; y <= 2025; y++) {
+    const option = document.createElement("option");
+    option.value = y;
+    option.textContent = y;
+    yearSelect.appendChild(option);
+}
+
+// Populate months
+const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+monthNames.forEach((name, index) => {
+    const option = document.createElement("option");
+    option.value = index + 1; // 1-12
+    option.textContent = name;
+    monthSelect.appendChild(option);
+});
+
+// Populate days 1-31
+for (let d = 1; d <= 31; d++) {
+    const option = document.createElement("option");
+    option.value = d;
+    option.textContent = d;
+    daySelect.appendChild(option);
+}
