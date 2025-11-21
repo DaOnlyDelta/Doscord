@@ -1,1 +1,19 @@
-Doscord is a modern, real-time chat platform inspired by Discord — built to bring communities together through seamless text, voice, and media sharing. Inspired by Discord.
+Doscord is a simple school project that simulates the login and registration system of a chat platform inspired by Discord. This project focuses on user authentication and basic front-end/back-end integration.
+
+Features
+
+User registration: Create a new account with a username and password.
+
+User login: Authenticate and access the platform.
+
+Form validation: Ensures proper input for emails, usernames, and passwords.
+
+Responsive design: Simple and clean interface for a user-friendly experience.
+
+Technologies Used
+
+Front-end: HTML, CSS, JavaScript
+
+Back-end: (Specify your backend, e.g., Node.js, Express, Python Flask, etc.)
+
+Database: (Specify your database, e.g., SQLite, MongoDB, etc.)
