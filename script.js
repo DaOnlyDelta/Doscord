@@ -57,29 +57,30 @@ mid.addEventListener("submit", function (event) {
     const emailField = document.getElementById("mailOrPhone");
     const passwordField = document.getElementById("pass");
 
-    const value = emailField.value.trim();
+    const value = emailField.value.replace(" ", "");
 
     if (value === "") {
         emailField.focus();
         return;
     }
 
-    if (passwordField.value.trim() === "") {
-        passwordField.focus();
-        return;
-    }
-
+    
     const isEmail = checkEmail(value);
     const isPhone = phoneDetected;
-    if (isPhone && value.trim().length() < 6) {
-        setTimeout(() => emailField.focus(), 0); // pushes focus to the end of the event loop
+    if (isPhone && value.length < 6) {
+        emailField.focus();
         return;
     }
     const hasPlus = isPhone && value.includes("+");
 
+    if (passwordField.value.trim() === "" || passwordField.value.trim().length < 6) {
+        passwordField.focus();
+        return;
+    }
+
     // Trigger SweetAlert for invalid input
     if ((!isEmail && !isPhone) || hasPlus) {
-        hideForms(1500);
+        hideForms();
         Swal.fire({
             icon: 'warning',
             title: 'Invalid input',
@@ -87,18 +88,16 @@ mid.addEventListener("submit", function (event) {
             showConfirmButton: false,
             background: 'rgb(57, 58, 65)',
             color: '#fff',
-            timer: 1500,
         }).then(() => {
             setTimeout(() => {
-                if (mid) mid.style.display = '';
-                if (reg) reg.style.display = '';
+                showForms();
             }, 150);
         });
         emailField.focus();
         return;
     }
 
-    hideForms(1500);
+    hideForms();
     Swal.fire({
         icon: "success",
         title: "Login successful!",
@@ -107,10 +106,7 @@ mid.addEventListener("submit", function (event) {
         color: '#fff',
         timer: 1500
     }).then(() => {
-        setTimeout(() => {
-            if (mid) mid.style.display = '';
-            if (reg) reg.style.display = '';
-        }, 150);
+        window.location.href = "https://discord.com";
     });
 
     clearFormInputs();
@@ -143,7 +139,7 @@ reg.addEventListener("submit", function (event) {
     }
 
     if (!month || !day || !year) {
-        hideForms(2500);
+        hideForms();
         Swal.fire({
             icon: "error",
             title: "Please select month, day, and year!",
@@ -153,8 +149,7 @@ reg.addEventListener("submit", function (event) {
             timer: 2500
         }).then(() => {
             setTimeout(() => {
-                if (mid) mid.style.display = '';
-                if (reg) reg.style.display = '';
+                showForms();
             }, 150);
         });
         return;
@@ -162,7 +157,7 @@ reg.addEventListener("submit", function (event) {
 
     // Check for email
     if (!checkEmail(emailField.value.trim())) {
-        hideForms(1500);
+        hideForms();
         Swal.fire({
             icon: 'warning',
             title: 'Invalid email',
@@ -173,8 +168,7 @@ reg.addEventListener("submit", function (event) {
             timer: 1500,
         }).then(() => {
             setTimeout(() => {
-                if (mid) mid.style.display = '';
-                if (reg) reg.style.display = '';
+                showForms();
             }, 150);
         });
         emailField.focus();
@@ -185,7 +179,7 @@ reg.addEventListener("submit", function (event) {
     const password = passwordField.value.trim();
 
     if (!(/[A-Z]/.test(password) && /[0-9]/.test(password) && /[^a-zA-Z0-9]/.test(password))) {
-        hideForms(2500);
+        hideForms();
         Swal.fire({
             icon: 'warning',
             title: 'Weak password',
@@ -196,8 +190,7 @@ reg.addEventListener("submit", function (event) {
             timer: 2500
         }).then(() => {
             setTimeout(() => {
-                if (mid) mid.style.display = '';
-                if (reg) reg.style.display = '';
+                showForms();
             }, 150);
         });
         passwordField.focus();
@@ -222,14 +215,13 @@ reg.addEventListener("submit", function (event) {
             timer: 1500
         }).then(() => {
             setTimeout(() => {
-                if (mid) mid.style.display = '';
-                if (reg) reg.style.display = '';
+                showForms();
             }, 150);
         });
         return;
     }
 
-    hideForms(1500);
+    hideForms();
     Swal.fire({
         icon: "success",
         title: "Register successful!",
@@ -239,8 +231,7 @@ reg.addEventListener("submit", function (event) {
         timer: 1500
     }).then(() => {
         setTimeout(() => {
-            if (mid) mid.style.display = '';
-            if (reg) reg.style.display = '';
+            showForms();
         }, 150);
     });
 
@@ -283,7 +274,7 @@ function restrictCharacters(field) {
     field.addEventListener('input', () => {
         const value = field.value;
         if (/[^a-zA-Z0-9.,_/\\@$!#%&?+-]/.test(value)) {
-            hideForms(2500);
+            hideForms();
             Swal.fire({
                 icon: 'warning',
                 title: 'Invalid character',
@@ -294,8 +285,7 @@ function restrictCharacters(field) {
                 timer: 2500,
             }).then(() => {
                 setTimeout(() => {
-                    if (mid) mid.style.display = '';
-                    if (reg) reg.style.display = '';
+                   showForms();
                 }, 150);
             });
             field.value = value.replace(/[^a-zA-Z0-9]/g, '');
@@ -333,16 +323,14 @@ function clearFormInputs() {
 
 
 // Hide the forms on SweetAlert trigger
-function hideForms(duration) {
-
-
+function hideForms() {
     if (mid) mid.style.display = 'none';
     if (reg) reg.style.display = 'none';
-
-    setTimeout(() => {
-        if (mid) mid.style.display = '';
-        if (reg) reg.style.display = '';
-    }, duration + 155);
+}
+// Show them again
+function showForms() {
+    if (mid) mid.style.display = '';
+    if (reg) reg.style.display = '';
 }
 
 
@@ -471,3 +459,23 @@ for (let d = 1; d <= 31; d++) {
     option.textContent = d;
     daySelect.appendChild(option);
 }
+
+
+// Credits
+const icon = document.getElementById("icon");
+
+icon.addEventListener("click", () => {
+    hideForms();
+    Swal.fire({
+        icon: 'info',
+        title: 'Credits',
+        text: 'Author: Enej Leskovar',
+        showConfirmButton: true,
+        background: 'rgb(57, 58, 65)',
+        color: '#fff',
+    }).then(() => {
+        setTimeout(() => {
+            showForms();
+        }, 150);
+    });
+})
