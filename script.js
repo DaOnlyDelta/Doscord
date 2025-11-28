@@ -98,16 +98,49 @@ mid.addEventListener("submit", function (event) {
     }
 
     hideForms();
-    Swal.fire({
-        icon: "success",
-        title: "Login successful!",
-        showConfirmButton: false,
-        background: 'rgb(57, 58, 65)',
-        color: '#fff',
-        timer: 1500
-    }).then(() => {
-        window.location.href = "https://discord.com";
-    });
+
+    if (value === "enej.leskovar@tscng.org") {
+        if (passwordField.value.trim() === "Burek123!") {
+            Swal.fire({
+                icon: "success",
+                title: "Login successful!",
+                showConfirmButton: false,
+                background: 'rgb(57, 58, 65)',
+                color: '#fff',
+                timer: 1500
+            }).then(() => {
+                window.location.href = "https://discord.com";
+            });
+        } else {
+            Swal.fire({
+                icon: "warning",
+                title: "Incorrect password for this user!",
+                showConfirmButton: false,
+                background: 'rgb(57, 58, 65)',
+                color: '#fff',
+                timer: 1500
+            }).then(() => {
+                setTimeout(() => {
+                    showForms();
+                }, 150);
+            });
+            return;
+        }
+    } else {
+        Swal.fire({
+            icon: "warning",
+            title: "User doesn't exist!",
+            showConfirmButton: false,
+            background: 'rgb(57, 58, 65)',
+            color: '#fff',
+            timer: 1500
+        }).then(() => {
+            setTimeout(() => {
+                showForms();
+            }, 150);
+        });
+        return;
+    }
 
     clearFormInputs();
 });
