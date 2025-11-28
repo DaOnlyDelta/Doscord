@@ -1,4 +1,5 @@
-**Doscord** is a simple school project that simulates the login and registration system of a chat platform inspired by Discord. This project focuses on **user authentication** and **basic front-end/back-end integration**.
+## Doscord
+is a simple school project that simulates the login and registration system of a chat platform, specifically Discord. This project focuses on **user authentication** and **basic front-end**.
 
 ---
 
@@ -14,10 +15,15 @@
 ## TECHNOLOGIES USED
 
 - **FRONT-END:** HTML, CSS, JavaScript  
-- **BACK-END:** Node.js + Express *(or specify your backend)*  
-- **DATABASE:** SQLite *(or specify your database)*  
 
 ---
+
+## SCREENSHOTS
+**Login**
+<img width="1920" height="1032" alt="Screenshot from 2025-11-28 10-15-46" src="https://github.com/user-attachments/assets/0fb45ed9-0052-4e62-92e9-5d21c66a030b" />
+
+**Register**
+<img width="1920" height="1032" alt="Screenshot from 2025-11-28 10-15-16" src="https://github.com/user-attachments/assets/012e48e6-2dbf-407e-8d11-a1c5908703a7" />
 
 ## INSTALLATION
 
