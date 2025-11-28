@@ -43,6 +43,11 @@ doscord/
 2. Register a new account or log in with existing credentials.  
 3. Enjoy the basic chat platform simulation.
 
+## SIMULATION CREDENTIALS
+
+**email**: enej.leskovar@tscng.org
+**password**: Burek123!
+
 ## AUTHOR
 Enej Leskovar
 
