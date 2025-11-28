@@ -45,7 +45,7 @@ doscord/
 
 ## SIMULATION CREDENTIALS
 
-**email**: enej.leskovar@tscng.org
+**email**: enej.leskovar@tscng.org<br>
 **password**: Burek123!
 
 ## AUTHOR
