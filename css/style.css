@@ -418,11 +418,12 @@ input[type=checkbox] {
 }
 
 .inputWrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border: none;
 }
 
 #mailOrPhone {
