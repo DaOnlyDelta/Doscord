@@ -23,4 +23,4 @@
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/doscord.git
+   git clone https://github.com/DaOnlyDelta/doscord.git
