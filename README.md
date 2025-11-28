@@ -1,4 +1,4 @@
-**Doscord is a simple school project that simulates the login and registration system of a chat platform inspired by Discord. This project focuses on user authentication and basic front-end/back-end integration.
+**Doscord** is a simple school project that simulates the login and registration system of a chat platform inspired by Discord. This project focuses on user authentication and basic front-end/back-end integration.
 
 Features
 
